@@ -16,8 +16,8 @@ import thunk from 'redux-thunk';
 //reducer
 import reducer from './reducers';
 //components
-import Smurfs from './components/Smurfs';
-import NewSmurfForm from './components/Smurfs';
+import Smurfs from './components/SmurfsData';
+import NewSmurfForm from './components/SmurfsData';
 //styling
 import "./App.css";
 
@@ -29,7 +29,12 @@ const store = createStore(reducer, applyMiddleware(thunk));
 function App() {
     return (
         <div className='App'>
-            <Smurfs />
+            <h1>Smurf Registration</h1>
+            <quote>
+                <p>All subjects of Far Far Away are hereby notified of the Smurf Registration Act, enacted by the great Lord Farquad. Below is a complete listing of all registered Smurfs. If you are an unregistered Smurf, or encounter one, please use the form below.</p>
+                <p>Lord Farquad</p>
+            </quote>
+            <SmurfsData />
             <NewSmurfForm />
         </div>
     );
