@@ -17,8 +17,8 @@ import thunk from 'redux-thunk';
 //reducer
 import reducer from './reducers';
 //components
-import Smurfs from './components/SmurfsData';
-import NewSmurfForm from './components/SmurfsData';
+import Smurfs from './components/SmurfData';
+import NewSmurfForm from './components/SmurfData';
 //styling
 import "./App.css";
 
