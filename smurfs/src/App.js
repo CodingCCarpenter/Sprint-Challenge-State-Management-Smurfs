@@ -4,6 +4,7 @@ dependencies added in addition to standard create-react-app dependencies:
     -react-redux
     -redux
     -redux-thunk
+    -reactstrap
 */
 
 //React imports
