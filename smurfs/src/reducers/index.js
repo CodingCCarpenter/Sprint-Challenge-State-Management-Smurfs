@@ -1,36 +1,32 @@
-import {
-    SMURFDATA_LOAD_START,
-    SMURFDATA_LOAD_SUCCESS,
-    SMURFDATA_LOAD_FAILURE
-} from '../actions';
+import { FETCH_START, FETCH_SUCCESS, FETCH_FAIL } from "../actions";
 
 const initialState = {
-    isLoading: false,
-    error: '',
-    smurf: { 
-        name: 'Brainey', 
-        age: 200, 
-        height: '5cm', 
-        id: 0 
-    }
+  data: [],
+  isFetching: false,
+  error: ""
 };
 
-const reducer = (state = initialState, action) => {
-    switch(action.type) {
-        case SMURFDATA_LOAD_START:
-            return{
-                ...state,
-                isLoading: true
-            };
-        case SMURFDATA_LOAD_SUCCESS:
-            return{
-                ...state,
-                isLoading: false,
-                smurf: { ...state.monster, name: action.payload, age: action.payload, id: action.payload}
-            };
-        default:
-            return state;
-    }
-}
-
-export default reducer;
+export const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_START:
+      return { 
+          ...state, 
+          isFetching: true 
+        };
+    case FETCH_SUCCESS:
+      return { 
+          ...state, 
+          data: action.payload, 
+          isFetching: false, 
+          error: "" 
+        };
+    case FETCH_FAIL:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+    default:
+      return state;
+  }
+};

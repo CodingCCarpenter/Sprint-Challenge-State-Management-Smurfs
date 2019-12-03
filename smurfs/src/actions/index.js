@@ -1,30 +1,47 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const SMURFDATA_LOAD_START = 'SMURFDATA_LOAD_START';
-export const SMURFDATA_LOAD_SUCCESS = 'SMURFDATA_LOAD_SUCCESS';
-export const SMURFDATA_LOAD_FAILURE = 'SMURFDATA_LOAD_FAILURE';
 
-export const getSmurfData = () => {
-    //transition to LOADING state by isLoading = true
-    //update monster data is successful 
-    //update error state if failure
+export const FETCH_START = "FETCH_START";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const FETCH_FAIL = "FETCH_FAIL";
 
-    console.log('cc: actions/getSmurfData: dispacth: ', dispatch);
-    dispatch({ type: SMURFDATA_LOAD_START });
+export const fetchData = () => (dispatch) => {
+  dispatch({ type: FETCH_START });
+  axios
+    .get("http://localhost:3333/smurfs")
+    .then((res) => dispatch({ 
+        type: FETCH_SUCCESS,
+        payload: res.data 
+    }))
+    .catch((err) => dispatch({ 
+        type: FETCH_FAIL, 
+        payload: err 
+    }));
+};
 
-    axios
-        .get('http://localhost:3333/smurfs')
-        .then(res => 
-            dispatch({
-                type: SMURFDATA_LOAD_SUCCESS,
-                payload: res.data.value
-            })
-        )
-        .catch(err => {
-            console.log(err);
-            dispatch({
-                type: SMURFDATA_LOAD_FAILURE,
-                payload: 'error loading data'
-            });
-        });
+export const submitForm = (data) => (dispatch) => {
+  dispatch({ type: FETCH_START });
+  axios
+    .post("http://localhost:3333/smurfs", data)
+    .then((res) => dispatch({ 
+        type: FETCH_SUCCESS, 
+        payload: res.data 
+    }))
+    .catch((err) => dispatch({ 
+        type: FETCH_FAIL, 
+        payload: err 
+    }));
+};
+
+export const deleteSmurf = (id) => (dispatch) => {
+  axios
+    .delete(`http://localhost:3333/smurfs/${id}`)
+    .then((res) => dispatch({ 
+        type: FETCH_SUCCESS, 
+        payload: res.data 
+    }))
+    .catch((err) => dispatch({ 
+        type: FETCH_FAIL, 
+        payload: err 
+    }));
 };
